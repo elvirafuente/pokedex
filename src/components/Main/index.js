@@ -46,12 +46,13 @@ class Main extends Component {
   }
 
   render(){
+    const { data } = this.state
     return (
       <main>
         {
           this.state.isFetching 
           ? <p>loading...</p>
-          : <PokemonList />
+          : <PokemonList data={data}/>
         }
       </main>
     )
