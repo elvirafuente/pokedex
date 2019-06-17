@@ -1,21 +1,16 @@
-import React from 'react'
+import React from 'react';
+import PokemonCard from '../PokemonCard';
+import './styles.scss';
 
 function PokemonList (props){
-    const { data } = props;
+    const { data, inputName } = props;
     return (
-        <ul>
-            {data.map(item => {
+        <ul className="main__list">
+            {data
+            .filter( item => item.name.toLowerCase().includes(inputName.toLowerCase()))
+            .map(item => {
                 return (
-                    <li key={item.id}>
-                        <h2>{item.name}</h2>
-                        <img src={item.sprites.front_default} alt={item.name}/>
-                        <p>{`ID: ${item.id}`}</p>
-                        {item.types.map(singleType => {
-                            return (
-                                <p>{singleType.type.name}</p>
-                            )
-                        })}
-                    </li>
+                    <PokemonCard item={item} key={item.id}/>
                 )
             })}
         </ul>
