@@ -7,10 +7,10 @@ function PokemonList (props){
     return (
         <ul className="main__list">
             {data
-            .filter( item => item.name.toLowerCase().includes(inputName.toLowerCase()))
+            .filter( item => !inputName ? item : item.name.toLowerCase().includes(inputName.toLowerCase()))
             .map(item => {
                 return (
-                    <PokemonCard item={item} key={item.id}/>
+                    <PokemonCard item={item} key={item.id} />
                 )
             })}
         </ul>

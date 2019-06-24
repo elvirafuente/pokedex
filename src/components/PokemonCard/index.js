@@ -8,11 +8,15 @@ function PokemonCard(props) {
             <h2>{item.name}</h2>
             <img src={item.sprites.front_default} alt={item.name} />
             <p>{`ID: ${item.id}`}</p>
+            <ul className="item__type-list">
             {item.types.map((singleType, index) => {
                 return (
-                    <p key={index}>{singleType.type.name}</p>
+                    <li className="item__type" key={index}>{singleType.type.name}</li>
                 )
             })}
+            </ul>
+            {item.evolves_from_species ? <p>Evoluciona de: {item.evolves_from_species.name}</p> : ''}
+            
         </li>
     )
 }

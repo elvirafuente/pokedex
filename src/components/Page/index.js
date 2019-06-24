@@ -1,4 +1,4 @@
-import React, { Component,Fragment } from 'react';
+import React, { Component, Fragment } from 'react';
 import './styles.scss';
 import Header from '../Header';
 import Footer from '../Footer';
@@ -11,60 +11,42 @@ class Page extends Component {
     this.state = {
       data: [],
       isFetching: true,
-      inputName:'',
+      inputName: '',
     }
     this.handleInputName = this.handleInputName.bind(this);
   }
 
-  componentDidMount(){
+  componentDidMount() {
     this.fetchApi();
   }
 
-  handleInputName(event){
+  handleInputName(event) {
     const { value } = event.target;
     this.setState({
       inputName: value,
     })
   }
 
-  fetchApi(){
-const url = 'https://pokeapi.co/api/v2/pokemon?limit=25';
+  fetchApi() {
+    const pokeData = fetchService();
+
     return (
-      fetchService(url)
-      .then(data => {
-        const { results } = data;
-        for(let i = 0; i < results.length; i++){
-          fetchService(results[i].url)
-          .then(dataSinglePoke => {
-            this.setState(prevState => {
-              return {
-                data: [
-                  ...prevState.data,
-                  dataSinglePoke
-                ]
-              }
-            })
-          })
-        }
-     
-
-
-        this.setState({
-          isFetching: false,
-        })
-      })      
+      this.setState({
+        data: pokeData,
+        isFetching: false,
+      })
     )
   }
 
-  render(){
+  render() {
     const { data, inputName } = this.state
     return (
       <Fragment>
         <Header />
         {
-          this.state.isFetching 
-          ? <p>loading...</p>
-          : <Main data={data} handleInputName={this.handleInputName} inputName={inputName}/>
+          this.state.isFetching
+            ? <p>loading...</p>
+            : <Main data={data} handleInputName={this.handleInputName} inputName={inputName} />
         }
         <Footer />
       </Fragment>
