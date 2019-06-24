@@ -4,12 +4,13 @@
     height: 220px;
     border: 1px solid lightgray;
     border-radius: 15px;
-    margin: 20px;
+    margin: 10px;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    box-shadow: 1px 1px 3px grey;
+    border: 3px solid #4d4d4d;
+    background-color: #e3f5fa;
     &:hover{
         box-shadow: 3px 3px 5px lightblue;
         cursor: pointer;   

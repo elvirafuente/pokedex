@@ -1,6 +1,7 @@
 import React, { Component,Fragment } from 'react';
 import './styles.scss';
 import Header from '../Header';
+import Footer from '../Footer';
 import Main from '../Main';
 import fetchService from '../../services/fetchService'
 
@@ -27,7 +28,7 @@ class Page extends Component {
   }
 
   fetchApi(){
-    const url = 'https://pokeapi.co/api/v2/pokemon?limit=25';
+const url = 'https://pokeapi.co/api/v2/pokemon?limit=25';
     return (
       fetchService(url)
       .then(data => {
@@ -45,6 +46,9 @@ class Page extends Component {
             })
           })
         }
+     
+
+
         this.setState({
           isFetching: false,
         })
@@ -62,6 +66,7 @@ class Page extends Component {
           ? <p>loading...</p>
           : <Main data={data} handleInputName={this.handleInputName} inputName={inputName}/>
         }
+        <Footer />
       </Fragment>
     )
   }

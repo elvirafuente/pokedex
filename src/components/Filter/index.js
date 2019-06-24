@@ -5,8 +5,8 @@ function Filter(props) {
     const { handleInputName, inputName } = props;
     return (
         <form className="main__filters">
-            <label htmlFor="filter-name">Filter by name</label>
-            <input type="text" id="filter-name" onChange={handleInputName} value={inputName}/>
+            <label className="filter__label" htmlFor="filter-name">Filter by name</label>
+            <input className="filter__input" type="text" id="filter-name" onChange={handleInputName} value={inputName}/>
         </form>
     )
 }
