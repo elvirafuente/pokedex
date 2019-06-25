@@ -17,26 +17,14 @@ class Page extends Component {
       inputName: '',
     }
     this.handleInputName = this.handleInputName.bind(this);
-    this.callbackFetch = this.callbackFetch.bind(this);
   }
 
 
-
-  callbackFetch(){
+  componentDidMount() {
+    this.fetchPokemon();
     this.setState({
       isFetching:false,
     })
-  }
-
-  fetchPokemon(callback){
-    const data = fetchService();
-    this.setState({
-      data: data,
-    });
-    callback();
-  }
-  componentDidMount() {
-    this.fetchPokemon(this.callbackFetch)
   }
 
   handleInputName(event) {
@@ -50,49 +38,72 @@ class Page extends Component {
     return this.state.data.find(item => item.id === parseInt(detailId))
   }
 
+  fetchPokemon(){
+    const url = 'https://pokeapi.co/api/v2/pokemon?limit=25';
+    fetchService(url)
+      .then(data => {
+        const { results } = data;
+        for (let i = 0; i < results.length; i++) {
+          fetchService(results[i].url)
+            .then(dataSinglePoke => {
+              const single = dataSinglePoke;
+              fetchService(single.species.url)
+                .then(dataEvolution => {
+                  const pokeTotal = { ...single, ...dataEvolution }
+                  this.setState(prevState => {
+                    return {
+                      data: [...prevState.data, pokeTotal]
+                    }
+                  })
+                })
+            
+            })
+        }
+      })
+  }
   
 
 
 
-  render() {
-    const { data, inputName } = this.state
-    return (
-      <Fragment>
-        <Header />
-        {
-          this.state.isFetching
-            ? <p>loading...</p>
-            : <Switch>
-                <Route
-                  exact path="/"
-                  render={() => {
-                    return (
-                      <Main 
-                        data={data} 
-                        handleInputName={this.handleInputName} 
-                        inputName={inputName} 
-                      />
-                    )
-                  }}                 
-                />
-                <Route
-                  path="/pokemon/:id"
-                  render={(routerProps) => {
-                    const routerId = routerProps.match.params.id;
-                    return (
-                      <PokemonDetail
-                        match={routerId}
-                        pokemon={this.getPokemon(routerId)}
-                      />
-                    )
-                  }}
-                />
-            </Switch>  
-        }
-        <Footer />
-      </Fragment>
-    )
-  }
+render() {
+  const { data, inputName } = this.state
+  return (
+    <Fragment>
+      <Header />
+      {
+        this.state.isFetching
+          ? <p>loading...</p>
+          : <Switch>
+            <Route
+              exact path="/"
+              render={() => {
+                return (
+                  <Main
+                    data={data}
+                    handleInputName={this.handleInputName}
+                    inputName={inputName}
+                  />
+                )
+              }}
+            />
+            <Route
+              path="/pokemon/:id"
+              render={(routerProps) => {
+                const routerId = routerProps.match.params.id;
+                return (
+                  <PokemonDetail
+                    match={routerId}
+                    pokemon={this.getPokemon(routerId)}
+                  />
+                )
+              }}
+            />
+          </Switch>
+      }
+      <Footer />
+    </Fragment>
+  )
+}
 }
 
 export default Page;

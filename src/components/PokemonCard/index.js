@@ -15,11 +15,11 @@ function PokemonCard(props) {
                 <ul className="item__type-list">
                 {item.types.map((singleType, index) => {
                     return (
-                            <li className="item__type" key={index}>{singleType.type.name}</li>
+                            <li className="item__type" key={index}><div className={`item__type-color ${singleType.type.name}`}></div>{singleType.type.name}</li>
                     )
                 })}
                 </ul>
-                {item.evolves_from_species ? <p>Evoluciona de: {item.evolves_from_species.name}</p> : ''}
+                {item.evolves_from_species ? <div className="item__evolution"><p>Evoluciona de:</p><p className="item__evolution-name">{item.evolves_from_species.name}</p></div> : ''}
                 
             </li>
         </Link>

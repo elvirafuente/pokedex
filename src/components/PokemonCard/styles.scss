@@ -1,7 +1,7 @@
 .list__item{
     list-style: none;
-    width: 180px;
-    height: 220px;
+    width: 190px;
+    height: 260px;
     border: 1px solid lightgray;
     border-radius: 15px;
     margin: 10px;
@@ -10,21 +10,78 @@
     align-items: center;
     justify-content: flex-start;
     border: 3px solid #4d4d4d;
-    background-color: #e3f5fa;
+    background-color: #e3f5fa; 
+    transition: transform ease 0.1s background-color ease 0.1s;
     &:hover{
         box-shadow: 3px 3px 5px lightblue;
-        cursor: pointer;   
+        cursor: pointer;
+        transform: scale(1.05);
+        background-color:  #bfe5f0;  
     }
 }
 
-.item__type-list{
+.item__type{
+    display: flex;
+    align-items: center;
+    &-color{
+        width: 15px;
+        height: 15px;
+        border-radius: 50%;
+        border: 1px solid black;
+        margin: 5px;
+    }
+    &-list{
     display: flex;
     list-style: none;
     width: 100%;
     justify-content: space-around;
+    }
+}
+
+.item__evolution{
+    width: 100%;
+    border-top: 1px solid #4d4d4d;
+    text-align: center;
+    padding: 5px;
+    margin-top: 5px;
+    &-name{
+        font-weight: 700;
+    }
 }
 
 .card__link{
     text-decoration: none;
     color: #2b2a2a;
+}
+
+.fire{
+    background-color: red;
+}
+
+.water{
+    background-color: cyan;
+}
+
+.poison{
+    background-color: black;
+}
+
+.grass{
+    background-color: green;
+}
+
+.flying{
+    background-color: orange;
+}
+
+.bug{
+    background-color: purple;
+}
+
+.electric {
+    background-color: darkblue;
+}
+
+.normal{
+    background-color: brown;
 }

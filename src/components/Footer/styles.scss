@@ -1,5 +1,4 @@
 .page__footer{
-    margin-bottom: 20px;
     border-top: 10px solid #4d4d4d;
     justify-content: center;
     align-items: center;
@@ -9,15 +8,7 @@
     background-color: #E84848;
     display: flex;
     flex-grow: 0;
-    @media all and (min-width:768px){
-        border: 10px solid #4d4d4d;
-        border-radius: 0 0 70px 70px;
-        width: 700px;
-    }
 
-    @media all and (min-width:1280px){
-        width: 1200px;
-    }
 }
 
 .footer__credits{

@@ -7,16 +7,12 @@
     width: 100%;
     border-top: 0;
     border-bottom: 0;
-    padding-bottom:40px;
+    padding-bottom:10px;
     flex-grow: 1;
     @media all and (min-width:768px){
-        width: 700px;
-        border: 10px solid #4d4d4d;
-        border-top: 0;
-        border-bottom: 0;
+        padding-bottom:40px;
     }
 
     @media all and (min-width:1280px){
-        width: 1200px;
     }
 }
